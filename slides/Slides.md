@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: default
-footer: 'https://example.com'
+footer: 'https://chris-ayers.com'
 style: |
   .columns {
     display: grid;
@@ -32,94 +32,168 @@ style: |
   @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css'
 ---
 
-# My Presentation
-![bg right](https://picsum.photos/800/600)
+<!-- _footer: 'https://github.com/Codebytes/kubernetes-resiliency' -->
+
+![bg left w:500px](./img/Kubernetes_Logo.png)
+
+# Kubernetes Resiliency
+
+# Chris Ayers ![w:120](img/portrait.png)
 
 ---
 
-<!-- Speaker Notes -->
-## Slide 1
+![bg left:40%](./img/portrait.png)
 
-- Item 1
-- Item 2
-- Item 3
-<!-- Can have multiple on a slide -->
+## Chris Ayers
+### Senior Customer Engineer<br>Microsoft
 
----
-
-## Slide 2
-<!-- Can also do a multiline
-comment that will show in notes -->
-
-![Image](https://picsum.photos/800/600)
+<i class="fa-brands fa-twitter"></i> Twitter: @Chris\_L\_Ayers
+<i class="fa-brands fa-mastodon"></i> Mastodon: @Chrisayers@hachyderm.io
+<i class="fa-brands fa-linkedin"></i> LinkedIn: - [chris\-l\-ayers](https://linkedin.com/in/chris-l-ayers/)
+<i class="fa fa-window-maximize"></i> Blog: [https://chris-ayers\.com/](https://chris-ayers.com/)
+<i class="fa-brands fa-github"></i> GitHub: [Codebytes](https://github.com/codebytes)
 
 ---
 
-## Slide 3
-
-> This is a quote.
-
----
-
-## Slide 4
-
-| Column 1 | Column 2 |
-| -------- | -------- |
-| Item 1   | Item 2   |
-| Item 3   | Item 4   |
+## Infrastructure
+- Single Points of Failure
+- Availability Zones
+- Node Pools
 
 ---
 
-![bg opacity](https://picsum.photos/800/600?image=53)
-## Slide 5
+### Single Points of Failure
+- Avoiding single points of failure ensures that your cluster remains operational in case of component failure.
+- Distributing workloads across multiple nodes, availability zones, and regions.
+
+---
+
+### Availability Zones
+- Group of data centers in a region.
+- Distribute workloads across multiple availability zones to ensure high availability.
+- Kubernetes can automatically spread workloads across zones.
+
+---
+
+### Node Pools
+- Group of nodes with the same configuration.
+- Useful for managing and scaling your cluster.
+- Can be spread across multiple availability zones for high availability.
+
+---
+
+## Components
+- etcd
+- API Server
+- kube-scheduler
+
+---
+
+### etcd
+- Distributed key-value store.
+- Stores the configuration data of the cluster.
+- Ensures consistency and high availability through consensus.
+
+---
+
+### API Server
+- Exposes the Kubernetes API.
+- Accepts and processes RESTful operations on cluster resources.
+- Can be scaled horizontally for high availability.
+
+---
+
+### kube-scheduler
+- Assigns newly created pods to nodes.
+- Considers resource availability and constraints when making decisions.
+- Can be run in an active-passive configuration for high availability.
+
+---
+
+## Applications
+- Pod Disruption Budgets
+- Resource Requests and Limits
+- Liveness and Readiness Probes
+
+---
+
+### Pod Disruption Budgets
+- Defines the minimum number of pods that must be available.
+- Ensures high availability during voluntary disruptions like node maintenance.
+- Can be specified per application or for the whole cluster.
+
+---
+
+### Resource Requests and Limits
+- Requests: minimum resources required by a container.
+- Limits: maximum resources a container can use.
+- Helps maintain stability by preventing resource contention.
+
+---
+
+### Why Use Requests Over Limits?
+- Requests ensure minimum resources for a container.
+- Kubernetes uses requests for scheduling decisions.
+  - Ensures containers have enough resources to run.
+  - Prevents resource starvation for critical workloads.
+- Limits cap resource usage to prevent overconsumption.
+  - May cause containers to be terminated if exceeded.
+  - Should be used as a safety net, not for scheduling purposes.
+- Focusing on requests optimizes cluster resource utilization and stability.
+
+---
+
+### Liveness Probes
+- Checks if a container is running.
+- If the probe fails, Kubernetes restarts the container.
+- Helps ensure that failed containers are automatically recovered.
+
+---
+
+### Readiness Probes
+- Checks if a container is ready to serve traffic.
+- If the probe fails, Kubernetes stops sending traffic to the container.
+- Ensures that only healthy containers receive traffic.
+
+---
+
+# Conclusion
+- Kubernetes provides several features to ensure resiliency.
+- Optimize your infrastructure and applications for high availability and stability.
+- Continuously monitor and adjust your cluster to maintain resiliency.
+
+---
+
+# Demos
+
+---
+
+# Questions
+
+![bg right](./img/owl.png)
+
+---
+
+# Resources 
 
 <div class="columns">
 <div>
 
-## Left
+## Links
 
-- 1
-- 2
+- [https://docs.microsoft.com/en-us/events/learntv/learnlive-iac-and-bicep/](https://docs.microsoft.com/en-us/events/learntv/learnlive-iac-and-bicep/)
+- [https://github.com/codebytes](https://github.com/codebytes)
 
 </div>
 <div>
 
-## Right
+## Chris Ayers 
 
-- 3
-- 4
+<i class="fa-brands fa-twitter"></i> Twitter: @Chris\_L\_Ayers
+<i class="fa-brands fa-mastodon"></i> Mastodon: @Chrisayers@hachyderm.io
+<i class="fa-brands fa-linkedin"></i> LinkedIn: - [chris\-l\-ayers](https://linkedin.com/in/chris-l-ayers/)
+<i class="fa fa-window-maximize"></i> Blog: [https://chris-ayers\.com/](https://chris-ayers.com/)
+<i class="fa-brands fa-github"></i> GitHub: [Codebytes](https://github.com/codebytes)
 
 </div>
-</div>
-
----
-
-## Slide 6
-
-<i class="fa-brands fa-twitter"></i> Twitter: 
-<i class="fa-brands fa-mastodon"></i> Mastodon: 
-<i class="fa-brands fa-linkedin"></i> LinkedIn: 
-<i class="fa fa-window-maximize"></i> Blog: 
-<i class="fa-brands fa-github"></i> GitHub: 
-
----
-
-# <!--fit--> Large Text
-
----
-
-<!-- Needed for mermaid, can be anywhere in file except frontmatter -->
-<script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true });
-</script>
-
-# Mermaid
-
-<div class="mermaid">
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
 </div>
