@@ -63,9 +63,7 @@ style: |
 
 ---
 
-## Infrastructure
-
----
+![bg right:60% w:700](img/kubernetes-infra.drawio.svg)
 
 ## Infrastructure
 - Single Points of Failure
@@ -106,15 +104,14 @@ style: |
 - Regularly review and update your infrastructure to adapt to changing requirements.
 - Monitor and analyze the performance of your nodes, availability zones, and node pools.
 - Use auto-scaling groups to adjust the size of your node pools based on demand.
-- Implement infrastructure as code (IaC) tools like Terraform to manage and version your infrastructure configuration.
+- Implement infrastructure as code (IaC) tools like Bicep or Terraform to manage and version your infrastructure configuration.
 - Establish a disaster recovery plan that includes backup and restoration processes for your cluster data and applications.
 
 ---
 
-![bg right fit](img/components-of-kubernetes.svg)
-## Kubernetes Components Overview
+![bg right:60% w:750](img/components-of-kubernetes.svg)
+## Kubernetes Control Plane Components Overview
 
-- Control Plane Components
   - kube-apiserver
   - etcd
   - kube-scheduler
@@ -123,10 +120,9 @@ style: |
 
 ---
 
-![bg right fit](img/components-of-kubernetes.svg)
-## Kubernetes Components Overview
+![bg right:60% w:750](img/components-of-kubernetes.svg)
+## Kubernetes Node Components Overview
 
-- Node Components
   - kubelet
   - kube-proxy
   - Container runtime
