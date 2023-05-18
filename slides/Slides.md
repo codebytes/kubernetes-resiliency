@@ -49,8 +49,8 @@ style: |
 
 <i class="fa-brands fa-twitter"></i> Twitter: @Chris\_L\_Ayers
 <i class="fa-brands fa-mastodon"></i> Mastodon: @Chrisayers@hachyderm.io
-<i class="fa-brands fa-linkedin"></i> LinkedIn: - [chris\-l\-ayers](https://linkedin.com/in/chris-l-ayers/)
-<i class="fa fa-window-maximize"></i> Blog: [https://chris-ayers\.com/](https://chris-ayers.com/)
+<i class="fa-brands fa-linkedin"></i> LinkedIn: [chris-l-ayers](https://linkedin.com/in/chris-l-ayers/)
+<i class="fa fa-window-maximize"></i> Blog: [https://chris-ayers.com/](https://chris-ayers.com/)
 <i class="fa-brands fa-github"></i> GitHub: [Codebytes](https://github.com/codebytes)
 
 ---
@@ -58,14 +58,15 @@ style: |
 # Agenda
 
 - Infrastructure
-- Components and Services
-- Workloads and Applications
+- Components
+- Applications
 
 ---
 
 ![bg right:60% w:700](img/kubernetes-infra.drawio.svg)
 
 ## Infrastructure
+
 - Single Points of Failure
 - Availability Zones
 - Node Pools
@@ -73,8 +74,9 @@ style: |
 ---
 
 ### Single Points of Failure
-- Avoiding single points of failure ensures that your cluster remains operational in case of component failure.
-- Distributing workloads across multiple nodes, availability zones, and regions.
+
+- Avoid single points of failure to maintain operational cluster resilience.
+- Distribute workloads across multiple nodes, availability zones, and regions.
 - Use replication controllers or replica sets to maintain multiple replicas of your applications.
 - Configure your load balancer to distribute traffic across multiple nodes.
 - Employ a multi-master setup for etcd and the Kubernetes control plane components.
@@ -82,50 +84,53 @@ style: |
 ---
 
 ### Availability Zones
-- Group of data centers in a region.
-- Distribute workloads across multiple availability zones to ensure high availability.
-- Kubernetes can automatically spread workloads across zones using the topologySpreadConstraints feature.
-- Use Regional Persistent Volumes (PVs) for storage that is available across multiple zones.
-- Leverage Kubernetes Federation to manage clusters across multiple regions.
+
+- Group of data centers within a region.
+- Distribute workloads across multiple availability zones for high availability.
+- Utilize Kubernetes' topologySpreadConstraints feature to automatically spread workloads.
+- Leverage Regional Persistent Volumes (PVs) for storage across multiple zones.
+- Manage clusters across multiple regions using Kubernetes Federation.
 
 ---
 
 ### Node Pools
-- Group of nodes with the same configuration.
-- Useful for managing and scaling your cluster.
-- Can be spread across multiple availability zones for high availability.
-- Allows for heterogeneous cluster configurations, such as using different instance types or hardware.
-- Simplifies cluster management by enabling separate upgrade and scaling processes for different node types.
-- Use Kubernetes taints and tolerations to separate workloads on specific node pools.
+
+- Group nodes with the same configuration.
+- Enable effective cluster management and scalability.
+- Spread node pools across multiple availability zones for high availability.
+- Support heterogeneous cluster configurations with different instance types or hardware.
+- Simplify cluster management with separate upgrade and scaling processes for different node types.
+- Use Kubernetes taints and tolerations to segregate workloads on specific node pools.
 
 ---
 
 ### Infrastructure Best Practices
-- Regularly review and update your infrastructure to adapt to changing requirements.
-- Monitor and analyze the performance of your nodes, availability zones, and node pools.
-- Use auto-scaling groups to adjust the size of your node pools based on demand.
-- Implement infrastructure as code (IaC) tools like Bicep or Terraform to manage and version your infrastructure configuration.
-- Establish a disaster recovery plan that includes backup and restoration processes for your cluster data and applications.
+
+- Regularly review and update infrastructure to meet changing requirements.
+- Monitor and analyze node, availability zone, and node pool performance.
+- Use auto-scaling groups to adjust node pool sizes based on demand.
+- Implement infrastructure as code (IaC) tools like Bicep or Terraform for infrastructure configuration management.
+- Establish a disaster recovery plan, including backup and restoration processes for cluster data and applications.
 
 ---
 
 ![bg right:60% w:750](img/components-of-kubernetes.svg)
 ## Kubernetes Control Plane Components Overview
 
-  - kube-apiserver
-  - etcd
-  - kube-scheduler
-  - kube-controller-manager
-  - cloud-controller-manager
+- kube-apiserver
+- etcd
+- kube-scheduler
+- kube-controller-manager
+- cloud-controller-manager
 
 ---
 
 ![bg right:60% w:750](img/components-of-kubernetes.svg)
 ## Kubernetes Node Components Overview
 
-  - kubelet
-  - kube-proxy
-  - Container runtime
+- kubelet
+- kube-proxy
+- Container runtime
 
 ---
 
@@ -134,7 +139,7 @@ style: |
 - Deploy multiple instances of kube-apiserver.
 - Use a load balancer to distribute traffic among instances.
 - Store the backing data in a highly available etcd cluster.
-- Regularly back up your etcd data.
+- Regularly back up etcd data.
 
 ---
 
@@ -150,7 +155,7 @@ style: |
 ### kube-scheduler High Availability
 
 - Run multiple instances of kube-scheduler.
-- Use leader election to ensure only one active scheduler is making decisions at a time.
+- Use leader election to ensure only one active scheduler makes decisions at a time.
 - Configure the `--leader-elect` flag for each kube-scheduler instance.
 
 ---
@@ -158,7 +163,7 @@ style: |
 ### kube-controller-manager High Availability
 
 - Run multiple instances of kube-controller-manager.
-- Use leader election to ensure only one active controller-manager is running controllers at a time.
+- Use leader election to ensure only one active controller-manager runs controllers at a time.
 - Configure the `--leader-elect` flag for each kube-controller-manager instance.
 
 ---
@@ -166,7 +171,7 @@ style: |
 ### cloud-controller-manager High Availability
 
 - Run multiple instances of cloud-controller-manager.
-- Use leader election to ensure only one active cloud-controller-manager is running controllers at a time.
+- Use leader election to ensure only one active cloud-controller-manager runs controllers at a time.
 - Configure the `--leader-elect` flag for each cloud-controller-manager instance.
 
 ---
@@ -211,113 +216,8 @@ style: |
 
 ---
 
-## Components
-- etcd
-- API Server
-- kube-scheduler
-
----
-
-### etcd
-- Distributed key-value store.
-- Stores the configuration data of the cluster.
-- Ensures consistency and high availability through consensus.
-
----
-
-### API Server
-- Exposes the Kubernetes API.
-- Accepts and processes RESTful operations on cluster resources.
-- Can be scaled horizontally for high availability.
-
----
-
-### kube-scheduler
-- Assigns newly created pods to nodes.
-- Considers resource availability and constraints when making decisions.
-- Can be run in an active-passive configuration for high availability.
-
-
----
-
-## Azure Kubernetes Service (AKS) High Availability
-
-- Control Plane High Availability
-- etcd High Availability
-- Node High Availability
-- Load Balancer Integration
-- Auto-Scaling
-- Upgrade and Patching
-- Monitoring and Logging
-- Backup and Disaster Recovery
-- Identity and Access Management
-
----
-
-### Control Plane High Availability
-
-- AKS offers a highly available control plane by default.
-- Runs multiple instances of kube-apiserver, kube-scheduler, kube-controller-manager, and other components.
-
----
-
-### etcd High Availability
-
-- AKS manages the etcd cluster for you.
-- Ensures that it is highly available, distributed, and automatically backed up.
-
----
-
-### Node High Availability
-
-- Configure multiple node pools spanning across multiple availability zones.
-- Distribute workloads and achieve high availability for worker nodes.
-
----
-
-### Load Balancer Integration
-
-- Automatically integrates with Azure Load Balancer and Azure Application Gateway.
-- Distributes traffic to nodes and ensures high availability for applications.
-
----
-
-### Auto-Scaling
-
-- Supports Kubernetes Cluster Autoscaler.
-- Automatically adjusts the number of nodes in the cluster based on workload demand.
-
----
-
-### Upgrade and Patching
-
-- Automates applying security patches and upgrading Kubernetes versions.
-- Ensures the cluster is always up to date and highly available.
-
----
-
-### Monitoring and Logging
-
-- Integrates with Azure Monitor, Log Analytics, and other Azure services.
-- Monitors health and performance of Kubernetes cluster components and applications.
-
----
-
-### Backup and Disaster Recovery
-
-- Offers automatic backup and restore capabilities for control plane and etcd components.
-- Use Azure services like Azure Backup and Azure Site Recovery for additional backup and recovery options.
-
----
-
-### Identity and Access Management
-
-- Integrates with Azure Active Directory (AAD).
-- Ensures secure access and role-based access control to the Kubernetes cluster and its resources.
-
----
-
 ## Applications
+
 - Pod Disruption Budgets
 - Resource Requests and Limits
 - Liveness and Readiness Probes
@@ -325,16 +225,18 @@ style: |
 ---
 
 ### Pod Disruption Budgets
-- Defines the minimum number of pods that must be available.
-- Ensures high availability during voluntary disruptions like node maintenance.
-- Can be specified per application or for the whole cluster.
+
+- Define the minimum number of pods that must be available.
+- Ensure high availability during voluntary disruptions like node maintenance.
+- Specify per-application or per-cluster pod disruption budgets.
 
 ---
 
 ### Resource Requests and Limits
-- Requests: minimum resources required by a container.
-- Limits: maximum resources a container can use.
-- Helps maintain stability by preventing resource contention.
+
+- Requests: Minimum resources required by a container.
+- Limits: Maximum resources a container can use.
+- Maintain stability by preventing resource contention.
 
 ---
 
@@ -350,24 +252,34 @@ style: |
 
 ---
 
-### Liveness Probes
-- Checks if a container is running.
-- If the probe fails, Kubernetes restarts the container.
-- Helps ensure that failed containers are automatically recovered.
+<div class="columns">
+  <div>
 
----
+  ## Liveness Probes
 
-### Readiness Probes
-- Checks if a container is ready to serve traffic.
-- If the probe fails, Kubernetes stops sending traffic to the container.
-- Ensures that only healthy containers receive traffic.
+  - Check if a container is running.
+  - Restart the container if the probe fails.
+  - Ensure failed containers are automatically recovered.
+
+  </div>
+  <div>
+  
+  ## Readiness Probes
+
+  - Check if a container is ready to serve traffic.
+  - Stop sending traffic to the container if the probe fails.
+  - Ensure only healthy containers receive traffic.
+
+  </div>
+</div>
 
 ---
 
 # Conclusion
+
 - Kubernetes provides several features to ensure resiliency.
-- Optimize your infrastructure and applications for high availability and stability.
-- Continuously monitor and adjust your cluster to maintain resiliency.
+- Optimize infrastructure and applications for high availability and stability.
+- Continuously monitor and adjust the cluster to maintain resiliency.
 
 ---
 
@@ -398,8 +310,8 @@ style: |
 
 <i class="fa-brands fa-twitter"></i> Twitter: @Chris\_L\_Ayers
 <i class="fa-brands fa-mastodon"></i> Mastodon: @Chrisayers@hachyderm.io
-<i class="fa-brands fa-linkedin"></i> LinkedIn: - [chris\-l\-ayers](https://linkedin.com/in/chris-l-ayers/)
-<i class="fa fa-window-maximize"></i> Blog: [https://chris-ayers\.com/](https://chris-ayers.com/)
+<i class="fa-brands fa-linkedin"></i> LinkedIn: [chris-l-ayers](https://linkedin.com/in/chris-l-ayers/)
+<i class="fa fa-window-maximize"></i> Blog: [https://chris-ayers.com/](https://chris-ayers.com/)
 <i class="fa-brands fa-github"></i> GitHub: [Codebytes](https://github.com/codebytes)
 
 </div>
