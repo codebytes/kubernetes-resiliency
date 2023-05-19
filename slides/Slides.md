@@ -58,8 +58,8 @@ style: |
 # Agenda
 
 - Infrastructure
-- Components
-- Applications
+- Kubernetes Components
+- Applications & Services
 
 ---
 
@@ -208,14 +208,6 @@ style: |
 
 ---
 
-## Conclusion
-
-- Ensure high availability for all Kubernetes components.
-- Monitor and manage components to maintain resiliency.
-- Use addons to provide additional functionality and enhance the Kubernetes cluster.
-
----
-
 ## Applications
 
 - Pod Disruption Budgets
@@ -232,23 +224,26 @@ style: |
 
 ---
 
-### Resource Requests and Limits
+<div class="columns">
+  <div>
 
-- Requests: Minimum resources required by a container.
-- Limits: Maximum resources a container can use.
-- Maintain stability by preventing resource contention.
+  ## Resource Requests
 
----
+  - Minimum resources required by a container.
+  - Can specify CPU and memory needs to ensure optimal performance.
+  - Helps in scheduling decisions, as containers with unsatisfied requests won't be deployed.
 
-### Why Use Requests Over Limits?
-- Requests ensure minimum resources for a container.
-- Kubernetes uses requests for scheduling decisions.
-  - Ensures containers have enough resources to run.
-  - Prevents resource starvation for critical workloads.
-- Limits cap resource usage to prevent overconsumption.
-  - May cause containers to be terminated if exceeded.
-  - Should be used as a safety net, not for scheduling purposes.
-- Focusing on requests optimizes cluster resource utilization and stability.
+  </div>
+  <div>
+  
+  ## Resource Limits
+
+  - Maximum resources a container can use.
+  - Limits act as a safety guard against resource overuse, ensuring fair usage across all containers.
+  - When a container exceeds the set limit, it can be terminated or throttled.
+
+  </div>
+</div>
 
 ---
 
@@ -275,15 +270,18 @@ style: |
 
 ---
 
-# Conclusion
+# Demos
 
-- Kubernetes provides several features to ensure resiliency.
-- Optimize infrastructure and applications for high availability and stability.
-- Continuously monitor and adjust the cluster to maintain resiliency.
 
 ---
 
-# Demos
+# Conclusion
+
+- Kubernetes excels at providing resiliency, ideal for managing complex, distributed systems.
+- Optimized infrastructure, regular monitoring, and adaptability are key to ensuring high availability and stability.
+- High availability of Kubernetes components and applications is crucial for system resilience.
+- Kubernetes ensures application availability via mechanisms such as Pod Disruption Budgets, Resource Requests, Limits, and Probes.
+- Continuous improvement and adaptability to change are critical to maintaining resiliency and performance.
 
 ---
 
@@ -300,7 +298,8 @@ style: |
 
 ## Links
 
-- [https://docs.microsoft.com/en-us/events/learntv/learnlive-iac-and-bicep/](https://docs.microsoft.com/en-us/events/learntv/learnlive-iac-and-bicep/)
+- [Kubernetes Documentation](https://kubernetes.io/docs/home/)
+- [Kubernetes Production Best Practices](https://learnk8s.io/production-best-practices)
 - [https://github.com/codebytes](https://github.com/codebytes)
 
 </div>
