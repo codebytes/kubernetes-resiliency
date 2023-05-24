@@ -1,6 +1,7 @@
 ---
 marp: true
 theme: default
+transition: coverflow
 footer: 'https://chris-ayers.com'
 style: |
   .columns {
@@ -63,7 +64,7 @@ style: |
 
 ---
 
-![bg right:60% w:700](img/kubernetes-infra.drawio.svg)
+![bg right:60% w:700](img/kubernetes-infra.drawio.png)
 
 ## Infrastructure
 
@@ -76,10 +77,11 @@ style: |
 ### Single Points of Failure
 
 - Avoid single points of failure to maintain operational cluster resilience.
+  - Compute (Nodes)
+  - Storage (PV)
+  - Networking (LB)
 - Distribute workloads across multiple nodes, availability zones, and regions.
-- Use replication controllers or replica sets to maintain multiple replicas of your applications.
 - Configure your load balancer to distribute traffic across multiple nodes.
-- Employ a multi-master setup for etcd and the Kubernetes control plane components.
 
 ---
 
@@ -90,6 +92,46 @@ style: |
 - Utilize Kubernetes' topologySpreadConstraints feature to automatically spread workloads.
 - Leverage Regional Persistent Volumes (PVs) for storage across multiple zones.
 - Manage clusters across multiple regions using Kubernetes Federation.
+
+---
+
+### Availability Zones
+
+
+<div class="columns">
+<div>
+
+<br />
+<br />
+
+Utilize Kubernetes' topologySpreadConstraints feature to automatically spread workloads.
+
+
+</div>
+<div>
+
+<div class="mermaid">
+graph BT
+    subgraph "zoneB" 
+        direction BT
+        p3(Pod) --> n3(Node3) 
+        n4(Node4) 
+    end 
+    subgraph "zoneA" 
+        direction BT
+        p1(Pod) --> n1(Node1) 
+        p2(Pod) --> n2(Node2) 
+    end
+
+classDef plain fill:#ddd,stroke:#fff,stroke-width:4px,color:#000;
+classDef k8s fill:#326ce5,stroke:#fff,stroke-width:4px,color:#fff;
+classDef cluster fill:#fff,stroke:#bbb,stroke-width:2px,color:#326ce5;
+class n1,n2,n3,n4,p1,p2,p3 k8s;
+class zoneA,zoneB cluster;
+</div>
+
+</div>
+</div>
 
 ---
 
@@ -114,7 +156,12 @@ style: |
 
 ---
 
-![bg right:60% w:750](img/components-of-kubernetes.svg)
+## Kubernetes Components ![bg right:60% w:750](img/kubernetes-infra.drawio.png)
+
+
+---
+
+![bg right:60% w:750](img/kubernetes-infra-control.drawio.png)
 ## Kubernetes Control Plane Components Overview
 
 - kube-apiserver
@@ -125,7 +172,7 @@ style: |
 
 ---
 
-![bg right:60% w:750](img/components-of-kubernetes.svg)
+![bg right:60% w:750](img/kubernetes-infra-node.drawio.png)
 ## Kubernetes Node Components Overview
 
 - kubelet
@@ -134,85 +181,133 @@ style: |
 
 ---
 
-### kube-apiserver High Availability
+### High Availability (HA) in Kubernetes
 
-- Deploy multiple instances of kube-apiserver.
-- Use a load balancer to distribute traffic among instances.
-- Store the backing data in a highly available etcd cluster.
-- Regularly back up etcd data.
+<div class="columns">
+<div>
 
----
+- Deploying multiple instances of components
+  -  Using leader election for coordination
+  -  Regular backup of important data. 
+- Each component requires monitoring
+- A strategy for automatic restart upon failure. 
 
-### etcd High Availability
+</div>
+<div>
 
-- Deploy etcd as a multi-node cluster.
-- Configure each etcd node with the `--initial-cluster-state` flag for an existing cluster.
-- Use an odd number of etcd nodes (e.g., 3, 5, 7) to maintain quorum.
-- Regularly back up etcd data and have a restore strategy in place.
+- **Control Plane Components**: kube-apiserver, etcd, kube-scheduler, kube-controller-manager, and cloud-controller-manager.
+- **Node Components**: kubelet and kube-proxy.
+- **Container Runtime**: Choose a runtime that supports HA, such as containerd or CRI-O.
 
----
-
-### kube-scheduler High Availability
-
-- Run multiple instances of kube-scheduler.
-- Use leader election to ensure only one active scheduler makes decisions at a time.
-- Configure the `--leader-elect` flag for each kube-scheduler instance.
+</div>
+</div>  
 
 ---
 
-### kube-controller-manager High Availability
+### Additional High Availability Considerations
 
-- Run multiple instances of kube-controller-manager.
-- Use leader election to ensure only one active controller-manager runs controllers at a time.
-- Configure the `--leader-elect` flag for each kube-controller-manager instance.
-
----
-
-### cloud-controller-manager High Availability
-
-- Run multiple instances of cloud-controller-manager.
-- Use leader election to ensure only one active cloud-controller-manager runs controllers at a time.
-- Configure the `--leader-elect` flag for each cloud-controller-manager instance.
+- **Addons**: Deploy as highly available components using ReplicaSets, Deployments, or StatefulSets and ensure fault tolerance.
+- **Container Runtime**: Use Kubernetes features like PodDisruptionBudgets and ReplicaSets for application availability.
 
 ---
 
-### kubelet High Availability
 
-- Ensure each node runs kubelet.
-- Monitor kubelet processes and restart them if they fail.
-- Use a Kubernetes cluster autoscaler to adjust the number of nodes based on demand.
+<div class="columns">
+<div>
 
----
+### Metrics Server
 
-### kube-proxy High Availability
+<br />
 
-- Run kube-proxy on each node in the cluster.
-- Use a DaemonSet to automatically deploy and manage kube-proxy instances.
-- Monitor kube-proxy processes and restart them if they fail.
+The resource metrics pipeline provides a limited set of metrics related to cluster components such as the Horizontal Pod Autoscaler controller, as well as the kubectl top utility. These metrics are collected by the lightweight, short-term, in-memory metrics-server and are exposed via the metrics.k8s.io API.
 
----
+</div>
+<div>
 
-### Container Runtime High Availability
+<div class="mermaid">
+flowchart BT
+subgraph cluster[Cluster]
+direction RL
+S[ <br><br> ]
+A[Metrics-<br>Server]
+subgraph B[Nodes]
+direction TB
+D[cAdvisor] --> C[kubelet]
+E[Container<br>runtime] --> D
+E1[Container<br>runtime] --> D
+P[pod data] -.- C
+end
+L[API<br>server]
+W[HPA]
+C ---->|Summary<br>API| A -->|metrics<br>API| L --> W
+end
+L ---> K[kubectl<br>top]
+classDef box fill:#fff,stroke:#000,stroke-width:1px,color:#000;
+class W,B,P,K,cluster,D,E,E1 box
+classDef spacewhite fill:#ffffff,stroke:#fff,stroke-width:0px,color:#000
+class S spacewhite
+classDef k8s fill:#326ce5,stroke:#fff,stroke-width:1px,color:#fff;
+class A,L,C k8s
+</div>
 
-- Choose a container runtime that supports high availability, such as containerd or CRI-O.
-- Monitor the container runtime on each node and restart it if it fails.
-- Use Kubernetes features like PodDisruptionBudgets and ReplicaSets to ensure application availability.
-
----
-
-### Addons High Availability
-
-- Deploy addons as highly available components using ReplicaSets, Deployments, or StatefulSets.
-- Configure multiple replicas for each addon to ensure fault tolerance.
-- Monitor and manage addon components to maintain their availability and performance.
+</div>
+</div>
 
 ---
 
 ## Applications
 
+- Horizontal Pod Autoscaler
 - Pod Disruption Budgets
 - Resource Requests and Limits
 - Liveness and Readiness Probes
+
+![bg left](img/application.jpg)
+
+---
+
+### Horizontal Pod Autoscaler
+
+
+<div class="columns">
+<div>
+<br/ >
+
+- **Handling Traffic Spikes**
+- **Efficient Resource Usage** 
+- **Custom Metrics Scaling**
+- **Stability During Failures**
+
+> The Horizontal Pod Autoscaler (HPA) in Kubernetes enhances application resilience by dynamically adjusting the number of pod replicas based on observed performance metrics.
+
+</div>
+<div>
+
+<div class="mermaid">
+graph BT
+
+hpa[Horizontal Pod Autoscaler] --> scale[Scale]
+
+subgraph rc [RC / RS / Deployment]
+scale 
+end
+
+scale -.-> pod1[Pod 1] 
+scale -.-> pod2[Pod 2] 
+scale -.-> pod3[Pod N]
+
+classDef hpa fill:#D5A6BD,stroke:#1E1E1D,stroke-width:1px,color:#1E1E1D; 
+classDef rc fill:#F9CB9C,stroke:#1E1E1D,stroke-width:1px,color:#1E1E1D; 
+classDef scale fill:#B6D7A8,stroke:#1E1E1D,stroke-width:1px,color:#1E1E1D; 
+classDef pod fill:#9FC5E8,stroke:#1E1E1D,stroke-width:1px,color:#1E1E1D; 
+class hpa hpa; 
+class rc rc; 
+class scale scale; 
+class pod1,pod2,pod3 pod
+</div>
+
+</div>
+</div>
 
 ---
 
