@@ -256,24 +256,20 @@ class A,L,C k8s
 
 <div class="mermaid">
 graph BT
-
 hpa[Horizontal Pod Autoscaler] --> scale[Scale]
-
 subgraph rc [RC / RS / Deployment]
-scale 
+scale
 end
-
-scale -.-> pod1[Pod 1] 
-scale -.-> pod2[Pod 2] 
+scale -.-> pod1[Pod 1]
+scale -.-> pod2[Pod 2]
 scale -.-> pod3[Pod N]
-
-classDef hpa fill:#D5A6BD,stroke:#1E1E1D,stroke-width:1px,color:#1E1E1D; 
-classDef rc fill:#F9CB9C,stroke:#1E1E1D,stroke-width:1px,color:#1E1E1D; 
-classDef scale fill:#B6D7A8,stroke:#1E1E1D,stroke-width:1px,color:#1E1E1D; 
-classDef pod fill:#9FC5E8,stroke:#1E1E1D,stroke-width:1px,color:#1E1E1D; 
-class hpa hpa; 
-class rc rc; 
-class scale scale; 
+classDef hpa fill:#D5A6BD,stroke:#1E1E1D,stroke-width:1px,color:#1E1E1D;
+classDef rc fill:#F9CB9C,stroke:#1E1E1D,stroke-width:1px,color:#1E1E1D;
+classDef scale fill:#B6D7A8,stroke:#1E1E1D,stroke-width:1px,color:#1E1E1D;
+classDef pod fill:#9FC5E8,stroke:#1E1E1D,stroke-width:1px,color:#1E1E1D;
+class hpa hpa;
+class rc rc;
+class scale scale;
 class pod1,pod2,pod3 pod
 </div>
 
