@@ -1,36 +1,8 @@
 ---
 marp: true
-theme: default
+theme: custom-default
 transition: coverflow
 footer: 'https://chris-ayers.com'
-style: |
-  .columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
-  .columns3 {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-  } 
-  img[alt~="center"] {
-    display: block;
-    margin: 0 auto;
-  }
-  .fa-twitter { color: aqua; }
-  .fa-mastodon { color: purple; }
-  .fa-linkedin { color: blue; }
-  .fa-window-maximize { color: skyblue; }
-
-  svg[id^="mermaid-"] { 
-    min-width: 480px; 
-    max-width: 960px; 
-    min-height: 360px; 
-    max-height: 600px; 
-  }
-
-  @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css'
 ---
 
 <!-- _footer: 'https://github.com/Codebytes/kubernetes-resiliency' -->
@@ -112,17 +84,16 @@ Utilize Kubernetes' topologySpreadConstraints feature to automatically spread wo
 
 <div class="mermaid">
 graph BT
-    subgraph "zoneB" 
+    subgraph "zoneB"
         direction BT
-        p3(Pod) --> n3(Node3) 
-        n4(Node4) 
-    end 
-    subgraph "zoneA" 
-        direction BT
-        p1(Pod) --> n1(Node1) 
-        p2(Pod) --> n2(Node2) 
+        p3(Pod) --> n3(Node3)
+        n4(Node4)
     end
-
+    subgraph "zoneA"
+        direction BT
+        p1(Pod) --> n1(Node1)
+        p2(Pod) --> n2(Node2)
+    end
 classDef plain fill:#ddd,stroke:#fff,stroke-width:4px,color:#000;
 classDef k8s fill:#326ce5,stroke:#fff,stroke-width:4px,color:#fff;
 classDef cluster fill:#fff,stroke:#bbb,stroke-width:2px,color:#326ce5;
