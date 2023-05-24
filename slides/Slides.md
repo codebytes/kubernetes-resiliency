@@ -410,3 +410,9 @@ class pod1,pod2,pod3 pod
 
 </div>
 </div>
+
+<!-- Needed for mermaid, can be anywhere in file except frontmatter -->
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
