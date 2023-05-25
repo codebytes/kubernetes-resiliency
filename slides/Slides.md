@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: custom-default
-transition: coverflow
+transition: pull
 footer: 'https://chris-ayers.com'
 ---
 
@@ -28,11 +28,26 @@ footer: 'https://chris-ayers.com'
 
 ---
 
+<div class="columns">
+<div>
+
 # Agenda
 
 - Infrastructure
 - Kubernetes Components
+- Networking
 - Applications & Services
+
+</div>
+<div>
+
+<video width="100%" autoplay loop muted>
+  <source src="./img/cargo-ship.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+</div>
+</div>
 
 ---
 
@@ -53,34 +68,40 @@ footer: 'https://chris-ayers.com'
   - Storage (PV)
   - Networking (LB)
 - Distribute workloads across multiple nodes, availability zones, and regions.
-- Configure your load balancer to distribute traffic across multiple nodes.
-
----
-
-### Availability Zones
-
-- Group of data centers within a region.
-- Distribute workloads across multiple availability zones for high availability.
-- Utilize Kubernetes' topologySpreadConstraints feature to automatically spread workloads.
-- Leverage Regional Persistent Volumes (PVs) for storage across multiple zones.
 - Manage clusters across multiple regions using Kubernetes Federation.
 
 ---
 
 ### Availability Zones
 
+- Distribute workloads across multiple availability zones for high availability.
+- Leverage Regional Persistent Volumes (PVs) for storage across multiple zones.
+- Configure your load balancer to distribute traffic across multiple nodes.
+
+
+![bg right 140%](img/availability-zones.png)
+
+---
+
+### Kubernetes TopologySpreadConstraints
 
 <div class="columns">
 <div>
 
-<br />
-<br />
 
 Utilize Kubernetes' topologySpreadConstraints feature to automatically spread workloads.
 
+- Provides **fine-grained control over Pod placement** across different topologies
+- Helps distribute Pods **evenly across Nodes, Zones, Racks, or Regions**
+- User defines `maxSkew` to limit **Pod count disparity** across Nodes
 
 </div>
 <div>
+
+<br />
+<br />
+<br />
+<br />
 
 <div class="mermaid">
 graph BT
@@ -180,6 +201,43 @@ class zoneA,zoneB cluster;
 - **Addons**: Deploy as highly available components using ReplicaSets, Deployments, or StatefulSets and ensure fault tolerance.
 - **Container Runtime**: Use Kubernetes features like PodDisruptionBudgets and ReplicaSets for application availability.
 
+![bg right](./img/shipping-is-not-risk-free.gif)
+
+---
+
+# Networking
+
+1. **Service Discovery**: Built-in service discovery allows Kubernetes to automatically route traffic to healthy service instances in case of failures.
+2. **Load Balancing**: Distributes incoming service traffic evenly across services or pods, preventing individual overload.
+
+3. **Network Policies**: Define rules for pod communication, contributing to security and stability.
+4. **Ingress Controllers**: Handle external traffic requests, route them based on rules, and provide features like rate limiting and circuit breaking.
+
+---
+
+<div class="columns">
+<div>
+
+### Rate Limiting
+
+Rate limiting is a technique for limiting network traffic. It sets a limit on how many requests a client can make to a server in a given amount of time. 
+
+- Protects your services from being overwhelmed by too much traffic.
+- Can be implemented at the application level or using a proxy server.
+
+</div>
+<div>
+
+### Circuit Breaking
+
+Circuit breaking is a technique used to prevent an application from trying to perform an operation that's likely to fail, allowing it to continue to operate without waiting for the fault or timeout to be fixed.
+
+- Prevents application failure from cascading to other services.
+- Allows applications to fail fast and recover rapidly.
+
+</div>
+</div>
+
 ---
 
 
@@ -233,7 +291,7 @@ class A,L,C k8s
 - Resource Requests and Limits
 - Liveness and Readiness Probes
 
-![bg left](img/application.jpg)
+![bg left](img/cargo-ship.jpg)
 
 ---
 
@@ -278,11 +336,31 @@ class pod1,pod2,pod3 pod
 
 ---
 
-### Pod Disruption Budgets
+### Pod Disruption Budgets (PDB)
 
-- Define the minimum number of pods that must be available.
-- Ensure high availability during voluntary disruptions like node maintenance.
-- Specify per-application or per-cluster pod disruption budgets.
+- **Pod Disruption**: Impacts the running state of a Pod, making it unavailable. 
+    - Involuntary: Unplanned scenarios like hardware failures. 
+    - Voluntary: Planned actions like manual upgrades.
+- **Pod Disruption Budget (PDB)**: Sets rules for the number of disruptions an application can handle. 
+
+#### PDB Definitions
+> **Minimum Available**:  Minimum number of replicas of a Pod that must be available.
+> **Maximum Unavailable**: Maximum number of replicas that can be unavailable.
+
+<!--
+
+## PDB Pitfalls
+1. May block or delay certain operations like node drain or Kubernetes version upgrades.
+2. Could impact the ability to scale down the cluster.
+
+ ## PDB Use-cases
+1. Ensuring a single instance app remains running during autoscaling.
+2. Keeping highly available apps running during operations that would otherwise disrupt all replicas.
+3. Enforcing rolling updates to ensure continuous availability.
+
+Note: PDB won't prevent direct removal of Pods, total node removal, but it can help manage disruptions due to node memory pressure and node pool upgrades.
+
+ -->
 
 ---
 
@@ -309,6 +387,32 @@ class pod1,pod2,pod3 pod
 
 ---
 
+## Quality of Service (QoS) Classes 
+
+<div class="columns">
+<div>
+
+- **Guaranteed**
+  - Containers have equal memory/CPU limits and requests
+- **Burstable**
+  - At least one Container has a memory or CPU request or limit
+- **BestEffort**
+  - No Containers have a memory/CPU limit or request
+
+</div>
+<div>
+
+- **QoS etermines Pod eviction order** under Node pressure: 
+  - BestEffort, Burstable, Guaranteed
+- **Memory QoS with cgroup v2 (alpha)**
+  - Uses cgroup v2 for guaranteed memory resources
+  - Works in conjunction with, but separate from, QoS class assignments
+
+</div>
+</div>
+
+---
+
 <div class="columns">
   <div>
 
@@ -329,11 +433,6 @@ class pod1,pod2,pod3 pod
 
   </div>
 </div>
-
----
-
-# Demos
-
 
 ---
 
