@@ -287,6 +287,7 @@ class A,L,C k8s
 ## Applications
 
 - Horizontal Pod Autoscaler
+- Kubernetes Event-driven Autoscaling (KEDA)
 - Pod Disruption Budgets
 - Resource Requests and Limits
 - Liveness and Readiness Probes
@@ -333,6 +334,19 @@ class pod1,pod2,pod3 pod
 
 </div>
 </div>
+
+---
+
+
+# Kubernetes Event-driven Autoscaling (KEDA)
+
+- **Event-Driven Scaling**: KEDA can scale your application based on events coming from a variety of sources.
+
+- **Supports Various Event Sources**: KEDA can work with numerous event sources such as Kafka, RabbitMQ, Azure Service Bus, and more.
+
+- **Scaling to Zero**: KEDA can scale down your application to zero pods when there are no events, saving valuable resources.
+
+- **Works With Kubernetes HPA**: KEDA extends the Kubernetes HPA to support external metrics from any source, allowing flexible autoscaling.
 
 ---
 
