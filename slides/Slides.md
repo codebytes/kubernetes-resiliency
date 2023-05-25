@@ -74,10 +74,11 @@ footer: 'https://chris-ayers.com'
 
 ### Availability Zones
 
-- Distribute workloads across multiple availability zones for high availability.
-- Leverage Regional Persistent Volumes (PVs) for storage across multiple zones.
-- Configure your load balancer to distribute traffic across multiple nodes.
-
+- Use Zone Aware services for high availability.
+  - Storage
+  - Load Balancers
+  - Registries
+- Utilize Kubernetes topologySpreadConstraints feature to control scheduling
 
 ![bg right 140%](img/availability-zones.png)
 
@@ -135,6 +136,21 @@ class zoneA,zoneB cluster;
 - Support heterogeneous cluster configurations with different instance types or hardware.
 - Simplify cluster management with separate upgrade and scaling processes for different node types.
 - Use Kubernetes taints and tolerations to segregate workloads on specific node pools.
+
+---
+
+### System vs User Node Pools
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+![bg 90%](./img/nodepool.drawio.png)
 
 ---
 
@@ -199,7 +215,7 @@ class zoneA,zoneB cluster;
 ### Additional High Availability Considerations
 
 - **Addons**: Deploy as highly available components using ReplicaSets, Deployments, or StatefulSets and ensure fault tolerance.
-- **Container Runtime**: Use Kubernetes features like PodDisruptionBudgets and ReplicaSets for application availability.
+- **Avoid naked pods!**
 
 ![bg right](./img/shipping-is-not-risk-free.gif)
 
