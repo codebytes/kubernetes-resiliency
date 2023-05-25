@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: custom-default
-transition: pull
+transition: cover
 footer: 'https://chris-ayers.com'
 ---
 
@@ -51,7 +51,7 @@ footer: 'https://chris-ayers.com'
 
 ---
 
-![bg right:60% w:700](img/kubernetes-infra.drawio.png)
+![bg right:60% w:700](img/kubernetes-infra-highlevel.drawio.png)
 
 ## Infrastructure
 
