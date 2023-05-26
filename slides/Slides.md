@@ -223,11 +223,7 @@ class zoneA,zoneB cluster;
 
 # Networking
 
-1. **Service Discovery**: Built-in service discovery allows Kubernetes to automatically route traffic to healthy service instances in case of failures.
-2. **Load Balancing**: Distributes incoming service traffic evenly across services or pods, preventing individual overload.
-
-3. **Network Policies**: Define rules for pod communication, contributing to security and stability.
-4. **Ingress Controllers**: Handle external traffic requests, route them based on rules, and provide features like rate limiting and circuit breaking.
+![bg left fit](./img/networking.jpg)
 
 ---
 
@@ -256,6 +252,31 @@ Circuit breaking is a technique used to prevent an application from trying to pe
 
 ---
 
+### Service Meshes
+
+A **service mesh** is a dedicated infrastructure layer designed to facilitate service-to-service communications between microservices, typically using a sidecar proxy.
+
+- **Improved Traffic Management**: Service meshes handle load balancing, rate limiting, and circuit breaking, providing granular control over traffic.
+
+- **Enhanced Observability**: They offer detailed insights, metrics, logs, and traces for better debugging and monitoring.
+
+- **Robust Security**: Service meshes provide robust security features, including mutual TLS for service-to-service communications.
+
+- **Simplified Service Discovery**: They support dynamic service discovery, reducing the complexity of managing microservices.
+
+---
+
+## Applications
+
+- Horizontal Pod Autoscaler
+- Kubernetes Event-driven Autoscaling (KEDA)
+- Pod Disruption Budgets
+- Resource Requests and Limits
+- Liveness and Readiness Probes
+
+![bg left](img/cargo-ship.jpg)
+
+---
 
 <div class="columns">
 <div>
@@ -297,18 +318,6 @@ class A,L,C k8s
 
 </div>
 </div>
-
----
-
-## Applications
-
-- Horizontal Pod Autoscaler
-- Kubernetes Event-driven Autoscaling (KEDA)
-- Pod Disruption Budgets
-- Resource Requests and Limits
-- Liveness and Readiness Probes
-
-![bg left](img/cargo-ship.jpg)
 
 ---
 
@@ -394,7 +403,7 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
 
 ---
 
-### Understanding Resource Requests
+### Resource Requests
 
 - **What are Resource Requests?** They define the minimum resources required by a container.
 - **Resource Types:** Specify CPU and memory needs for optimal performance.
@@ -410,7 +419,7 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
 
 ---
 
-### Understanding Resource Limits
+### Resource Limits
 
 - **What are Resource Limits?** They define the maximum resources a container can use.
 - **Safety Guard:** Limits act as a safety guard against resource overuse, ensuring fair usage across all containers.
