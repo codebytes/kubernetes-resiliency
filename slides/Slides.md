@@ -354,7 +354,7 @@ class pod1,pod2,pod3 pod
 ---
 
 
-# Kubernetes Event-driven Autoscaling (KEDA)
+### Kubernetes Event-driven Autoscaling (KEDA)
 
 - **Event-Driven Scaling**: KEDA can scale your application based on events coming from a variety of sources.
 
@@ -394,10 +394,50 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
 
 ---
 
+### Understanding Resource Requests
+
+- **What are Resource Requests?** They define the minimum resources required by a container.
+- **Resource Types:** Specify CPU and memory needs for optimal performance.
+- **Scheduling Decisions:** Kubernetes uses resource requests to make informed scheduling decisions.
+
+---
+
+### Importance of Resource Requests
+
+- **Optimal Performance:** Resource requests ensure your container has the necessary resources for optimal performance.
+- **Balanced Scheduling:** Inform Kubernetes on how to balance resources across the cluster through defined resource requests.
+- **Avoid Resource Starvation:** Resource requests prevent a container from being starved of resources by other more demanding containers.
+
+---
+
+### Understanding Resource Limits
+
+- **What are Resource Limits?** They define the maximum resources a container can use.
+- **Safety Guard:** Limits act as a safety guard against resource overuse, ensuring fair usage across all containers.
+- **Exceeding a Limit:** When a container exceeds the set limit, it can be terminated or throttled.
+
+---
+
+### Importance of Resource Limits
+
+- **Avoid Overconsumption:** Resource limits prevent a container from consuming all resources on a node.
+- **Stability of Workloads:** By setting limits, you ensure the stability of other workloads on the same node.
+- **Prevent Disruptions:** Resource limits help avoid disruptions if a container starts consuming more resources than expected.
+
+---
+
+### Dangers of Misconfigured Resource Limits
+
+- **Unexpected termination:** If a container exceeds its limit, it can be killed unexpectedly, leading to service disruption.
+- **Performance degradation:** If limits are too restrictive, the container might be constantly throttled, resulting in degraded performance.
+- **Resource waste:** Setting limits too high can lead to resource wastage, as unused resources are reserved and can't be used by other containers.
+
+---
+
 <div class="columns">
   <div>
 
-  ## Resource Requests
+  ### Resource Requests
 
   - Minimum resources required by a container.
   - Can specify CPU and memory needs to ensure optimal performance.
@@ -406,7 +446,7 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
   </div>
   <div>
   
-  ## Resource Limits
+  ### Resource Limits
 
   - Maximum resources a container can use.
   - Limits act as a safety guard against resource overuse, ensuring fair usage across all containers.
@@ -417,7 +457,7 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
 
 ---
 
-## Quality of Service (QoS) Classes 
+### Quality of Service (QoS) Classes 
 
 <div class="columns">
 <div>
@@ -446,7 +486,7 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
 <div class="columns">
   <div>
 
-  ## Liveness Probes
+  ### Liveness Probes
 
   - Check if a container is running.
   - Restart the container if the probe fails.
@@ -455,7 +495,7 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
   </div>
   <div>
   
-  ## Readiness Probes
+  ### Readiness Probes
 
   - Check if a container is ready to serve traffic.
   - Stop sending traffic to the container if the probe fails.
