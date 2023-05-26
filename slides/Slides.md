@@ -515,6 +515,27 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
 
 ---
 
+## Load Testing Your Cluster
+
+Load testing is the practice of testing system performance under normal and peak usage conditions. It helps identify bottlenecks, performance degradation, and capacity limits in your Kubernetes cluster.
+
+- Use load testing tools (like Azure Load Testing, Jmeter, Locust, Gatling, Siege, etc.)
+- Test your services under normal and extreme conditions.
+- Monitor performance metrics (CPU, Memory, Network IO).
+- Improve scalability & resilience based on findings.
+
+---
+
+## Chaos Testing
+
+Chaos Testing, or Chaos Engineering, is the discipline of experimenting on a system to uncover its weaknesses.
+
+- Introduce failures into your Kubernetes cluster deliberately (like pod failures, network failures, etc.) using tools like Azure Chaos Studio, Litmus, Chaos Mesh, PowerfulSeal.
+- Test the system's ability to maintain availability and minimize impact.
+- Helps in building robust, fault-tolerant systems by proactively identifying and fixing potential issues.
+
+---
+
 # Conclusion
 
 - Kubernetes excels at providing resiliency, ideal for managing complex, distributed systems.
