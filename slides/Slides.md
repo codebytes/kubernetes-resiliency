@@ -37,6 +37,7 @@ footer: 'https://chris-ayers.com'
 - Kubernetes Components
 - Networking
 - Applications & Services
+- Testing
 
 </div>
 <div>
@@ -512,6 +513,15 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
 
   </div>
 </div>
+
+---
+
+# Testing
+![bg right:70% fit](./img/i-dont-always-test-but-when-i-do-i-test-in-production.jpg)
+
+---
+
+![bg 80%](./img/test-in-production-meme.jpg)
 
 ---
 
