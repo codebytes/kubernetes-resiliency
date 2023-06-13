@@ -228,28 +228,27 @@ class zoneA,zoneB cluster;
 
 ---
 
-<div class="columns">
-<div>
-
 ### Rate Limiting
+
+![bg right fit 95%](img/rate-limiting.drawio.png)
 
 Rate limiting is a technique for limiting network traffic. It sets a limit on how many requests a client can make to a server in a given amount of time. 
 
 - Protects your services from being overwhelmed by too much traffic.
 - Can be implemented at the application level or using a proxy server.
 
-</div>
-<div>
+---
 
 ### Circuit Breaking
+
+
+![bg right:40% fit 35%](img/circuit-breaker.drawio.png)
+
 
 Circuit breaking is a technique used to prevent an application from trying to perform an operation that's likely to fail, allowing it to continue to operate without waiting for the fault or timeout to be fixed.
 
 - Prevents application failure from cascading to other services.
 - Allows applications to fail fast and recover rapidly.
-
-</div>
-</div>
 
 ---
 
@@ -257,13 +256,10 @@ Circuit breaking is a technique used to prevent an application from trying to pe
 
 A **service mesh** is a dedicated infrastructure layer designed to facilitate service-to-service communications between microservices, typically using a sidecar proxy.
 
-- **Improved Traffic Management**: Service meshes handle load balancing, rate limiting, and circuit breaking, providing granular control over traffic.
-
-- **Enhanced Observability**: They offer detailed insights, metrics, logs, and traces for better debugging and monitoring.
-
-- **Robust Security**: Service meshes provide robust security features, including mutual TLS for service-to-service communications.
-
-- **Simplified Service Discovery**: They support dynamic service discovery, reducing the complexity of managing microservices.
+- **Improved Traffic Management**: Load balancing, rate limiting, circuit breaking.
+- **Enhanced Observability**: Insights, metrics, logs, traces.
+- **Robust Security**: Mutual TLS, service-to-service communications.
+- **Simplified Service Discovery**: Dynamic service discovery.
 
 ---
 
@@ -339,6 +335,9 @@ class A,L,C k8s
 </div>
 <div>
 
+<br />
+<br />
+
 <div class="mermaid">
 graph BT
 hpa[Horizontal Pod Autoscaler] --> scale[Scale]
@@ -366,13 +365,10 @@ class pod1,pod2,pod3 pod
 
 ### Kubernetes Event-driven Autoscaling (KEDA)
 
-- **Event-Driven Scaling**: KEDA can scale your application based on events coming from a variety of sources.
-
-- **Supports Various Event Sources**: KEDA can work with numerous event sources such as Kafka, RabbitMQ, Azure Service Bus, and more.
-
-- **Scaling to Zero**: KEDA can scale down your application to zero pods when there are no events, saving valuable resources.
-
-- **Works With Kubernetes HPA**: KEDA extends the Kubernetes HPA to support external metrics from any source, allowing flexible autoscaling.
+- **Event-Driven Scaling**: Scale based on events.
+- **Various Event Sources**: Kafka, RabbitMQ, Azure Service Bus.
+- **Scaling to Zero**: Save resources when no events.
+- **Works With Kubernetes HPA**: Extend HPA for external metrics.
 
 ---
 
@@ -444,26 +440,7 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
 
 ---
 
-<div class="columns">
-  <div>
-
-  ### Resource Requests
-
-  - Minimum resources required by a container.
-  - Can specify CPU and memory needs to ensure optimal performance.
-  - Helps in scheduling decisions, as containers with unsatisfied requests won't be deployed.
-
-  </div>
-  <div>
-  
-  ### Resource Limits
-
-  - Maximum resources a container can use.
-  - Limits act as a safety guard against resource overuse, ensuring fair usage across all containers.
-  - When a container exceeds the set limit, it can be terminated or throttled.
-
-  </div>
-</div>
+![bg fit](img/limit.drawio.png)
 
 ---
 
