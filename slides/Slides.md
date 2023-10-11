@@ -5,6 +5,30 @@ transition: cover
 footer: 'https://chris-ayers.com'
 ---
 
+
+<!-- 
+_color: white
+_footer: 'https://github.com/Codebytes/kubernetes-resiliency'
+-->
+
+![bg](./img/techorama.png)
+
+<div class="columns">
+<div>
+
+</div>
+<div>
+
+# SRE, DevOps, and Platform Engineering
+## Unraveling the Differences
+
+### Chris Ayers
+
+</div>
+</div>
+
+---
+
 <!-- _footer: 'https://github.com/Codebytes/kubernetes-resiliency' -->
 
 ![bg left w:500px](./img/Kubernetes_Logo.png)
@@ -62,14 +86,24 @@ footer: 'https://chris-ayers.com'
 
 ---
 
-### Single Points of Failure
+### Single Points of Failure / Failure Domains
 
+
+- **Failure Domains**: Areas where localized failures occur.
 - Avoid single points of failure to maintain operational cluster resilience.
   - Compute (Nodes)
   - Storage (PV)
   - Networking (LB)
 - Distribute workloads across multiple nodes, availability zones, and regions.
 - Manage clusters across multiple regions using Kubernetes Federation.
+
+---
+
+### Planning for Failure Domains
+- **Multi-zonal and Multi-regional Deployments**
+- **Topology Awareness**
+- **Replica Distribution**
+![bg right:40% w:70%](img/spread.png)
 
 ---
 
@@ -117,11 +151,12 @@ graph BT
         p1(Pod) --> n1(Node1)
         p2(Pod) --> n2(Node2)
     end
-classDef plain fill:#ddd,stroke:#fff,stroke-width:4px,color:#000;
-classDef k8s fill:#326ce5,stroke:#fff,stroke-width:4px,color:#fff;
-classDef cluster fill:#fff,stroke:#bbb,stroke-width:2px,color:#326ce5;
-class n1,n2,n3,n4,p1,p2,p3 k8s;
-class zoneA,zoneB cluster;
+  classDef plain fill:#ddd,stroke:#fff,stroke-width:4px,color:#000;
+  classDef k8s fill:#326ce5,stroke:#fff,stroke-width:4px,color:#fff;
+  classDef cluster fill:#fff,stroke:#bbb,stroke-width:2px,color:#326ce5;
+  class n1,n2,n3,n4,p1,p2,p3 k8s;
+  class zoneA,zoneB cluster;
+
 </div>
 
 </div>
@@ -152,6 +187,27 @@ class zoneA,zoneB cluster;
 
 
 ![bg 90%](./img/nodepool.drawio.png)
+
+---
+
+# Kubernetes Federation / Fleet Management
+
+<div class="columns">
+<div>
+
+- **Federation**
+- **Fleet Management**
+
+</div>
+<div>
+
+- **Unified Management**
+- **Cross-Cluster Scheduling**
+- **Resource Sharing**
+
+</div>
+</div>
+
 
 ---
 
@@ -265,6 +321,7 @@ A **service mesh** is a dedicated infrastructure layer designed to facilitate se
 
 ## Applications
 
+- Deployment Patterns
 - Horizontal Pod Autoscaler
 - Kubernetes Event-driven Autoscaling (KEDA)
 - Pod Disruption Budgets
@@ -272,6 +329,79 @@ A **service mesh** is a dedicated infrastructure layer designed to facilitate se
 - Liveness and Readiness Probes
 
 ![bg left](img/cargo-ship.jpg)
+
+---
+
+
+# Blast Radius of Change
+
+![bg right fit](img/blast-radius.png)
+
+- The "Blast Radius" refers to the potential impact of a change or failure.
+- Understanding and managing the blast radius is crucial in minimizing disruptions.
+
+---
+
+# Feature Flags & Toggles
+
+- Enable/Disable features without deploying new code.
+- Gradually roll out features to a subset of users.
+- Easily roll back problematic features.
+- Test in production, ensuring real-world performance.
+
+---
+
+# Canary Deployments
+
+![bg right w:55%](img/canary1.drawio.png)
+
+A release strategy involving gradual rollout to a small group before full deployment.
+
+---
+
+# Canary Deployments
+
+![bg right w:55%](img/canary2.drawio.png)
+
+"Canaries" are the initial users/servers to detect issues or bugs in the new release.
+
+---
+
+# Canary Deployments
+
+![bg right w:55%](img/canary3.drawio.png)
+
+Incremental deployment reduces the risk of widespread outages.
+
+---
+
+# Canary Deployments
+
+![bg right w:55%](img/canary4.drawio.png)
+
+Continuous monitoring and feedback gather performance insights.
+
+---
+
+# Blue Green Deployments
+
+![bg right:40% w:90%](img/blue-green1.drawio.png)
+
+- Parallel Environments: Maintain Blue (production) and Green (updates).
+- Zero Downtime: Switch between Blue and Green without downtime.
+- Testing & Validation: Thoroughly validate updates in the Green environment.
+- Instant Rollback: Quickly revert to the stable Blue environment if issues arise.
+
+---
+
+# Blue Green Deployments
+
+![bg right:40% w:90%](img/blue-green2.drawio.png)
+
+- Controlled Release: Gradually shift traffic from Blue to Green.
+- Canary Testing: Test updates with a small portion of traffic in the Green environment.
+- Traffic Cut-Over: Switch all traffic to Green after successful validation.
+- Rollback Option: Instantly return to the stable Blue environment if needed.
 
 ---
 
