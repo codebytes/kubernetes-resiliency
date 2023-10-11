@@ -19,8 +19,7 @@ _footer: 'https://github.com/Codebytes/kubernetes-resiliency'
 </div>
 <div>
 
-# SRE, DevOps, and Platform Engineering
-## Unraveling the Differences
+# Kubernetes Resiliency
 
 ### Chris Ayers
 
