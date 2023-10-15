@@ -5,29 +5,6 @@ transition: cover
 footer: 'https://chris-ayers.com'
 ---
 
-
-<!-- 
-_color: white
-_footer: 'https://github.com/Codebytes/kubernetes-resiliency'
--->
-
-![bg](./img/techorama.png)
-
-<div class="columns">
-<div>
-
-</div>
-<div>
-
-# Kubernetes Resiliency
-
-### Chris Ayers
-
-</div>
-</div>
-
----
-
 <!-- _footer: 'https://github.com/Codebytes/kubernetes-resiliency' -->
 
 ![bg left w:500px](./img/Kubernetes_Logo.png)
@@ -588,7 +565,7 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
 </div>
 <div>
 
-- **QoS etermines Pod eviction order** under Node pressure: 
+- **QoS determines Pod eviction order** under Node pressure: 
   - BestEffort, Burstable, Guaranteed
 - **Memory QoS with cgroup v2 (alpha)**
   - Uses cgroup v2 for guaranteed memory resources
@@ -596,6 +573,17 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
 
 </div>
 </div>
+
+---
+
+**PriorityClass**
+A non-namespaced object used to define the relative priority of Pods.
+
+- Assign priorities to Pods, ensuring critical workloads are scheduled first.
+- Control Pod eviction order during resource contention.
+
+  - **Resource Assurance**: Ensure critical Pods get the resources they need.
+  - **Controlled Eviction**: Manage Pod eviction in a controlled manner during resource crunches.
 
 ---
 
