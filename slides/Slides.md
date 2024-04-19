@@ -293,6 +293,24 @@ A **service mesh** is a dedicated infrastructure layer designed to facilitate se
 - **Robust Security**: Mutual TLS, service-to-service communications.
 - **Simplified Service Discovery**: Dynamic service discovery.
 
+![w:700px center](./img/service-mesh.png)
+
+---
+
+### The Evolution of Service Mesh Architecture
+
+**From Library to Kernel:**
+
+![fit center](img/service-mesh-evolution.png)
+
+---
+
+### eBPF
+
+eBPF (Extended Berkeley Packet Filter) extends the Linux kernel's capabilities without changing its code, leading to a new paradigm in service mesh implementation.
+
+![w:800px center](img/ebpf.png)
+
 ---
 
 ## Applications
