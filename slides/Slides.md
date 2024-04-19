@@ -343,6 +343,8 @@ eBPF (Extended Berkeley Packet Filter) extends the Linux kernel's capabilities w
 - Easily roll back problematic features.
 - Test in production, ensuring real-world performance.
 
+![fit center](./img/feature-flag-management.png)
+
 ---
 
 # Canary Deployments
