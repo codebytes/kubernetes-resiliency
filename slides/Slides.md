@@ -146,12 +146,11 @@ graph BT
 
 ### Node Pools
 
-- Group nodes with the same configuration.
-- Enable effective cluster management and scalability.
-- Spread node pools across multiple availability zones for high availability.
-- Support heterogeneous cluster configurations with different instance types or hardware.
-- Simplify cluster management with separate upgrade and scaling processes for different node types.
-- Use Kubernetes taints and tolerations to segregate workloads on specific node pools.
+- **Configuration Uniformity**: Group similar nodes for consistency.
+- **Enhanced Management**: Facilitate scalability and updates through structured node pool strategies.
+- **Distributed Setup**: Ensure high availability by spreading node pools across multiple zones.
+- **Support Diversity**: Accommodate various hardware and instance types.
+- **Workload Segregation**: Utilize Kubernetes taints and tolerations to manage workload distribution.
 
 ---
 
@@ -188,16 +187,15 @@ graph BT
 </div>
 </div>
 
-
 ---
 
 ### Infrastructure Best Practices
 
-- Regularly review and update infrastructure to meet changing requirements.
-- Monitor and analyze node, availability zone, and node pool performance.
-- Use auto-scaling groups to adjust node pool sizes based on demand.
-- Implement infrastructure as code (IaC) tools like Bicep or Terraform for infrastructure configuration management.
-- Establish a disaster recovery plan, including backup and restoration processes for cluster data and applications.
+- **Update Regularly**: Align infrastructure with current needs.
+- **Monitor Performance**: Track metrics across nodes and zones.
+- **Implement Auto-Scaling**: Adjust node pools based on demand.
+- **Use IaC Tools**: Manage configurations with Bicep or Terraform.
+- **Establish Disaster Recovery**: Ensure robust backup and restoration protocols.
 
 ---
 
@@ -231,21 +229,19 @@ graph BT
 <div class="columns">
 <div>
 
-- Deploying multiple instances of components
-  -  Using leader election for coordination
-  -  Regular backup of important data. 
-- Each component requires monitoring
-- A strategy for automatic restart upon failure. 
+- **Redundancy**: Deploy multiple instances of components with leader election and data backups.
+- **Monitoring**: Continuously monitor each component.
+- **Resilience**: Implement automatic restart strategies for component failures.
 
 </div>
 <div>
 
-- **Control Plane Components**: kube-apiserver, etcd, kube-scheduler, kube-controller-manager, and cloud-controller-manager.
-- **Node Components**: kubelet and kube-proxy.
-- **Container Runtime**: Choose a runtime that supports HA, such as containerd or CRI-O.
+- **Control Plane Components**: `kube-apiserver`, `etcd`, `kube-scheduler`, `kube-controller-manager`, `cloud-controller-manager`.
+- **Node Components**: `kubelet`, `kube-proxy`.
+- **Container Runtime**: Opt for HA-supportive runtimes like `containerd` or `CRI-O`.
 
 </div>
-</div>  
+</div>
 
 ---
 
@@ -261,6 +257,14 @@ graph BT
 # Networking
 
 ![bg left fit](./img/networking.jpg)
+
+---
+
+### Networking: Key Techniques
+
+- **Rate Limiting**: Control traffic flow to services to prevent overload.
+- **Circuit Breaking**: Prevent failures from cascading across services.
+- **Service Mesh**: Manage service-to-service communications with enhanced security and observability.
 
 ---
 
@@ -405,36 +409,13 @@ Continuous monitoring and feedback gather performance insights.
 
 ---
 
-# Metrics, Observability, and Scaling
-
-![bg right](./img/metrics.png)
-
----
-
 ### Monitoring and Observability Essentials
 
 Ensure system reliability, performance, and security.
   - Detect issues early with proactive monitoring.
   - Gain deep insights for optimization through continuous observability.
 
----
-
-### OpenTelemetry for Unified Telemetry
-
-Standardizes collection and export of metrics, logs, and traces.
-  - Consistent observability across environments.
-  - Vendor-neutral, integrates with multiple analytics tools.
-  - Simplifies instrumentation, enhancing diagnostic capabilities.
-
----
-
-### Real-time Monitoring Benefits
-
-- **Actions**:
-  - Utilize real-time data for immediate issue response and resource adjustment.
-  - Implement automated alerts and interactive dashboards for trend analysis.
-- **Outcome**:
-  - Continuous application performance refinement and user experience improvement.
+![bg right](./img/metrics.png)
 
 ---
 
@@ -539,29 +520,14 @@ class pod1,pod2,pod3 pod
 
 ### Pod Disruption Budgets (PDB)
 
-- **Pod Disruption**: Impacts the running state of a Pod, making it unavailable. 
-    - Involuntary: Unplanned scenarios like hardware failures. 
-    - Voluntary: Planned actions like manual upgrades.
-- **Pod Disruption Budget (PDB)**: Sets rules for the number of disruptions an application can handle. 
+- **Purpose**: Ensures pod availability during both planned and unplanned disruptions.
+- **Key Definitions**:
+  - **Minimum Available**: Minimum operational pods.
+  - **Maximum Unavailable**: Maximum disrupted pods.
 
-#### PDB Definitions
-> **Minimum Available**:  Minimum number of replicas of a Pod that must be available.
-> **Maximum Unavailable**: Maximum number of replicas that can be unavailable.
-
-<!--
-
-## PDB Pitfalls
-1. May block or delay certain operations like node drain or Kubernetes version upgrades.
-2. Could impact the ability to scale down the cluster.
-
- ## PDB Use-cases
-1. Ensuring a single instance app remains running during autoscaling.
-2. Keeping highly available apps running during operations that would otherwise disrupt all replicas.
-3. Enforcing rolling updates to ensure continuous availability.
-
-Note: PDB won't prevent direct removal of Pods, total node removal, but it can help manage disruptions due to node memory pressure and node pool upgrades.
-
- -->
+**Use Cases and Limitations**:
+- Maintains application continuity during operational changes.
+- May delay node-related operations and affect scaling.
 
 ---
 
