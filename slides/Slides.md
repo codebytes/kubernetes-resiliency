@@ -52,6 +52,10 @@ footer: 'https://chris-ayers.com'
 
 ---
 
+![bg](./img/mordor.png)
+
+---
+
 ![bg right:60% w:700](img/kubernetes-infra-highlevel.drawio.png)
 
 ## Infrastructure
@@ -401,6 +405,39 @@ Continuous monitoring and feedback gather performance insights.
 
 ---
 
+# Metrics, Observability, and Scaling
+
+![bg right](./img/metrics.png)
+
+---
+
+### Monitoring and Observability Essentials
+
+Ensure system reliability, performance, and security.
+  - Detect issues early with proactive monitoring.
+  - Gain deep insights for optimization through continuous observability.
+
+---
+
+### OpenTelemetry for Unified Telemetry
+
+Standardizes collection and export of metrics, logs, and traces.
+  - Consistent observability across environments.
+  - Vendor-neutral, integrates with multiple analytics tools.
+  - Simplifies instrumentation, enhancing diagnostic capabilities.
+
+---
+
+### Real-time Monitoring Benefits
+
+- **Actions**:
+  - Utilize real-time data for immediate issue response and resource adjustment.
+  - Implement automated alerts and interactive dashboards for trend analysis.
+- **Outcome**:
+  - Continuous application performance refinement and user experience improvement.
+
+---
+
 <div class="columns">
 <div>
 
@@ -496,6 +533,8 @@ class pod1,pod2,pod3 pod
 - **Scaling to Zero**: Save resources when no events.
 - **Works With Kubernetes HPA**: Extend HPA for external metrics.
 
+![bg right:40% fit](./img/keda.png)
+
 ---
 
 ### Pod Disruption Budgets (PDB)
@@ -526,43 +565,14 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
 
 ---
 
-### Resource Requests
-
-- **What are Resource Requests?** They define the minimum resources required by a container.
-- **Resource Types:** Specify CPU and memory needs for optimal performance.
-- **Scheduling Decisions:** Kubernetes uses resource requests to make informed scheduling decisions.
+# Resource Requests and Limits
 
 ---
 
-### Importance of Resource Requests
-
-- **Optimal Performance:** Resource requests ensure your container has the necessary resources for optimal performance.
-- **Balanced Scheduling:** Inform Kubernetes on how to balance resources across the cluster through defined resource requests.
-- **Avoid Resource Starvation:** Resource requests prevent a container from being starved of resources by other more demanding containers.
-
----
-
-### Resource Limits
-
-- **What are Resource Limits?** They define the maximum resources a container can use.
-- **Safety Guard:** Limits act as a safety guard against resource overuse, ensuring fair usage across all containers.
-- **Exceeding a Limit:** When a container exceeds the set limit, it can be terminated or throttled.
-
----
-
-### Importance of Resource Limits
-
-- **Avoid Overconsumption:** Resource limits prevent a container from consuming all resources on a node.
-- **Stability of Workloads:** By setting limits, you ensure the stability of other workloads on the same node.
-- **Prevent Disruptions:** Resource limits help avoid disruptions if a container starts consuming more resources than expected.
-
----
-
-### Dangers of Misconfigured Resource Limits
-
-- **Unexpected termination:** If a container exceeds its limit, it can be killed unexpectedly, leading to service disruption.
-- **Performance degradation:** If limits are too restrictive, the container might be constantly throttled, resulting in degraded performance.
-- **Resource waste:** Setting limits too high can lead to resource wastage, as unused resources are reserved and can't be used by other containers.
+| **Resource Requests** | **Resource Limits** |
+|-----------------------|---------------------|
+| Ensure that containers have sufficient CPU and memory to function optimally. | Cap the maximum resources a container may consume. |
+| Influence Kubernetes scheduling decisions to maintain a balanced resource distribution and prevent starvation. | Protect the stability of the node and prevent any single container from monopolizing resources, which can lead to system-wide issues. |
 
 ---
 
@@ -570,40 +580,36 @@ Note: PDB won't prevent direct removal of Pods, total node removal, but it can h
 
 ---
 
-### Quality of Service (QoS) Classes 
+### Best Practices for Configuration
 
-<div class="columns">
-<div>
+Properly configuring requests and limits is vital:
 
-- **Guaranteed**
-  - Containers have equal memory/CPU limits and requests
-- **Burstable**
-  - At least one Container has a memory or CPU request or limit
-- **BestEffort**
-  - No Containers have a memory/CPU limit or request
+- **Requests** should reflect the minimum necessary resources for normal application function.
+- **Limits** should be set to prevent applications from causing disruptions due to unexpected or excessive resource usage, without being so restrictive that they cause the application to be throttled unnecessarily.
+---
 
-</div>
-<div>
+### Quality of Service (QoS) Classes in Kubernetes
 
-- **QoS determines Pod eviction order** under Node pressure: 
-  - BestEffort, Burstable, Guaranteed
-- **Memory QoS with cgroup v2 (alpha)**
-  - Uses cgroup v2 for guaranteed memory resources
-  - Works in conjunction with, but separate from, QoS class assignments
-
-</div>
-</div>
+| **QoS Class** | **Description** | **Pod Eviction Order** |
+|---|-----------------|------------------------|
+| **Guaranteed** | Containers have equal<br> memory/CPU limits and requests. | Least likely to be evicted |
+| **Burstable** | At least one container has a<br> memory or CPU request or limit. | Middle priority for eviction |
+| **BestEffort** | No containers have a <br> memory/CPU limit or request. | Most likely to be evicted |
 
 ---
 
-**PriorityClass**
-A non-namespaced object used to define the relative priority of Pods.
+### PriorityClass for Pod Scheduling and Eviction
 
-- Assign priorities to Pods, ensuring critical workloads are scheduled first.
-- Control Pod eviction order during resource contention.
+**PriorityClass** is a non-namespaced object that defines the relative priority of Pods to control scheduling and eviction policies under resource contention.
 
-  - **Resource Assurance**: Ensure critical Pods get the resources they need.
-  - **Controlled Eviction**: Manage Pod eviction in a controlled manner during resource crunches.
+**Features**:
+- **Resource Assurance**: Assigns priorities to ensure critical workloads are scheduled first and receive the necessary resources.
+- **Controlled Eviction**: Manages pod eviction in a structured manner to maintain stability during high demand or limited resources.
+
+---
+
+# Probes
+
 
 ---
 
