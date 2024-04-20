@@ -328,7 +328,7 @@ eBPF (Extended Berkeley Packet Filter) extends the Linux kernel's capabilities w
 - Kubernetes Event-driven Autoscaling (KEDA)
 - Pod Disruption Budgets
 - Resource Requests and Limits
-- Liveness and Readiness Probes
+- Liveness, Readiness, and Startup Probes
 
 ![bg left](img/cargo-ship.jpg)
 
@@ -579,23 +579,29 @@ Properly configuring requests and limits is vital:
 
 ---
 
-<div class="columns">
+<div class="columns3">
   <div>
 
-  ### Liveness Probes
-
-  - Check if a container is running.
-  - Restart the container if the probe fails.
-  - Ensure failed containers are automatically recovered.
+  #### Liveness Probes
+  - Checks container run status.
+  - Restarts on failure.
+  - Auto-recovers failed containers.
 
   </div>
   <div>
   
-  ### Readiness Probes
+  #### Readiness Probes
+  - Verifies readiness to handle traffic.
+  - Blocks traffic on failure.
+  - Ensures traffic to healthy containers only.
 
-  - Check if a container is ready to serve traffic.
-  - Stop sending traffic to the container if the probe fails.
-  - Ensure only healthy containers receive traffic.
+  </div>
+  <div>
+  
+  #### Startup Probes
+  - Allows time for slow-starting containers to boot.
+  - Postpones Liveness and Readiness Probes until successful start.
+  - Vital for apps with complex initializations or large data loads.
 
   </div>
 </div>
