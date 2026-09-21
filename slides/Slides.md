@@ -2,14 +2,14 @@
 marp: true
 theme: custom-default
 transition: cover
-footer: 'https://chris-ayers.com'
+footer: "https://chris-ayers.com"
 ---
 
 <!-- _footer: 'https://github.com/Codebytes/kubernetes-resiliency' -->
 
-![bg left w:500px](./img/Kubernetes_Logo.png)
-
 # <!--fit--> Kubernetes Resiliency
+
+![bg left w:500px](./img/Kubernetes_Logo.png)
 
 ## Chris Ayers ![w:120](img/portrait.png)
 
@@ -30,10 +30,12 @@ footer: 'https://chris-ayers.com'
 
 ---
 
+<!-- _class: agenda-heading -->
+
 <div class="columns">
 <div>
 
-# Agenda
+## Agenda
 
 - Infrastructure
 - Kubernetes Components
@@ -70,7 +72,6 @@ footer: 'https://chris-ayers.com'
 
 ### Single Points of Failure / Failure Domains
 
-
 - **Failure Domains**: Areas where localized failures occur.
 - Avoid single points of failure to maintain operational cluster resilience.
   - Compute (Nodes)
@@ -82,10 +83,11 @@ footer: 'https://chris-ayers.com'
 ---
 
 ### Planning for Failure Domains
+
 - **Multi-zonal and Multi-regional Deployments**
 - **Topology Awareness**
 - **Replica Distribution**
-![bg right:40% w:70%](img/spread.png)
+  ![bg right:40% w:70%](img/spread.png)
 
 ---
 
@@ -105,7 +107,6 @@ footer: 'https://chris-ayers.com'
 
 <div class="columns">
 <div>
-
 
 Utilize Kubernetes' topologySpreadConstraints feature to automatically spread workloads.
 
@@ -157,21 +158,23 @@ graph BT
 ---
 
 ### System vs User Node Pools
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
 ![bg 90%](./img/nodepool.drawio.png)
 
 ---
 
-# Kubernetes Federation / Fleet Management
+<!-- _class: title-heading -->
+
+## Kubernetes Federation / Fleet Management
 
 <div class="columns">
 <div>
@@ -203,10 +206,10 @@ graph BT
 
 ## Kubernetes Components ![bg right:60% w:750](img/kubernetes-infra.drawio.png)
 
-
 ---
 
 ![bg right:60% w:750](img/kubernetes-infra-control.drawio.png)
+
 ## Kubernetes Control Plane Components Overview
 
 - kube-apiserver
@@ -218,6 +221,7 @@ graph BT
 ---
 
 ![bg right:60% w:750](img/kubernetes-infra-node.drawio.png)
+
 ## Kubernetes Node Components Overview
 
 - kubelet
@@ -256,7 +260,9 @@ graph BT
 
 ---
 
-# Networking
+<!-- _class: title-heading -->
+
+## Networking
 
 ![bg left fit](./img/networking.jpg)
 
@@ -274,7 +280,7 @@ graph BT
 
 ![bg right fit 95%](img/rate-limiting.drawio.png)
 
-Rate limiting is a technique for limiting network traffic. It sets a limit on how many requests a client can make to a server in a given amount of time. 
+Rate limiting is a technique for limiting network traffic. It sets a limit on how many requests a client can make to a server in a given amount of time.
 
 - Protects your services from being overwhelmed by too much traffic.
 - Can be implemented at the application level or using a proxy server.
@@ -283,9 +289,7 @@ Rate limiting is a technique for limiting network traffic. It sets a limit on ho
 
 ### Circuit Breaking
 
-
 ![bg right:40% fit 35%](img/circuit-breaker.drawio.png)
-
 
 Circuit breaking is a technique used to prevent an application from trying to perform an operation that's likely to fail, allowing it to continue to operate without waiting for the fault or timeout to be fixed.
 
@@ -336,8 +340,9 @@ eBPF (Extended Berkeley Packet Filter) extends the Linux kernel's capabilities w
 
 ---
 
+<!-- _class: title-heading -->
 
-# Blast Radius of Change
+## Blast Radius of Change
 
 ![bg right fit](img/blast-radius.png)
 
@@ -346,7 +351,9 @@ eBPF (Extended Berkeley Packet Filter) extends the Linux kernel's capabilities w
 
 ---
 
-# Feature Flags & Toggles
+<!-- _class: title-heading -->
+
+## Feature Flags & Toggles
 
 - Enable/Disable features without deploying new code.
 - Gradually roll out features to a subset of users.
@@ -357,7 +364,9 @@ eBPF (Extended Berkeley Packet Filter) extends the Linux kernel's capabilities w
 
 ---
 
-# Canary Deployments
+<!-- _class: title-heading -->
+
+## Canary Deployments
 
 ![bg right w:55%](img/canary1.drawio.png)
 
@@ -365,7 +374,9 @@ A release strategy involving gradual rollout to a small group before full deploy
 
 ---
 
-# Canary Deployments
+<!-- _class: title-heading -->
+
+## Initial Canary Users
 
 ![bg right w:55%](img/canary2.drawio.png)
 
@@ -373,7 +384,9 @@ A release strategy involving gradual rollout to a small group before full deploy
 
 ---
 
-# Canary Deployments
+<!-- _class: title-heading -->
+
+## Incremental Canary Rollout
 
 ![bg right w:55%](img/canary3.drawio.png)
 
@@ -381,7 +394,9 @@ Incremental deployment reduces the risk of widespread outages.
 
 ---
 
-# Canary Deployments
+<!-- _class: title-heading -->
+
+## Canary Monitoring
 
 ![bg right w:55%](img/canary4.drawio.png)
 
@@ -389,7 +404,9 @@ Continuous monitoring and feedback gather performance insights.
 
 ---
 
-# Blue Green Deployments
+<!-- _class: title-heading -->
+
+## Blue Green Deployments
 
 ![bg right:40% w:90%](img/blue-green1.drawio.png)
 
@@ -400,7 +417,9 @@ Continuous monitoring and feedback gather performance insights.
 
 ---
 
-# Blue Green Deployments
+<!-- _class: title-heading -->
+
+## Blue Green Cut-Over
 
 ![bg right:40% w:90%](img/blue-green2.drawio.png)
 
@@ -414,8 +433,9 @@ Continuous monitoring and feedback gather performance insights.
 ### Monitoring and Observability Essentials
 
 Ensure system reliability, performance, and security.
-  - Detect issues early with proactive monitoring.
-  - Gain deep insights for optimization through continuous observability.
+
+- Detect issues early with proactive monitoring.
+- Gain deep insights for optimization through continuous observability.
 
 ![bg right](./img/metrics.png)
 
@@ -466,13 +486,12 @@ class A,L,C k8s
 
 ### Horizontal Pod Autoscaler
 
-
 <div class="columns">
 <div>
 <br/ >
 
 - **Handling Traffic Spikes**
-- **Efficient Resource Usage** 
+- **Efficient Resource Usage**
 - **Custom Metrics Scaling**
 - **Stability During Failures**
 
@@ -508,7 +527,6 @@ class pod1,pod2,pod3 pod
 
 ---
 
-
 ### Kubernetes Event-driven Autoscaling (KEDA)
 
 - **Event-Driven Scaling**: Scale based on events.
@@ -528,18 +546,21 @@ class pod1,pod2,pod3 pod
   - **Maximum Unavailable**: Maximum disrupted pods.
 
 **Use Cases and Limitations**:
+
 - Maintains application continuity during operational changes.
 - May delay node-related operations and affect scaling.
 
 ---
 
-# Resource Requests and Limits
+<!-- _class: title-heading -->
+
+## Resource Requests and Limits
 
 ---
 
-| **Resource Requests** | **Resource Limits** |
-|-----------------------|---------------------|
-| Ensure that containers have sufficient CPU and memory to function optimally. | Cap the maximum resources a container may consume. |
+| **Resource Requests**                                                                                          | **Resource Limits**                                                                                                                   |
+| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Ensure that containers have sufficient CPU and memory to function optimally.                                   | Cap the maximum resources a container may consume.                                                                                    |
 | Influence Kubernetes scheduling decisions to maintain a balanced resource distribution and prevent starvation. | Protect the stability of the node and prevent any single container from monopolizing resources, which can lead to system-wide issues. |
 
 ---
@@ -554,15 +575,16 @@ Properly configuring requests and limits is vital:
 
 - **Requests** should reflect the minimum necessary resources for normal application function.
 - **Limits** should be set to prevent applications from causing disruptions due to unexpected or excessive resource usage, without being so restrictive that they cause the application to be throttled unnecessarily.
+
 ---
 
 ### Quality of Service (QoS) Classes in Kubernetes
 
-| **QoS Class** | **Description** | **Pod Eviction Order** |
-|---|-----------------|------------------------|
-| **Guaranteed** | Containers have equal<br> memory/CPU limits and requests. | Least likely to be evicted |
-| **Burstable** | At least one container has a<br> memory or CPU request or limit. | Middle priority for eviction |
-| **BestEffort** | No containers have a <br> memory/CPU limit or request. | Most likely to be evicted |
+| **QoS Class**  | **Description**                                                  | **Pod Eviction Order**       |
+| -------------- | ---------------------------------------------------------------- | ---------------------------- |
+| **Guaranteed** | Containers have equal<br> memory/CPU limits and requests.        | Least likely to be evicted   |
+| **Burstable**  | At least one container has a<br> memory or CPU request or limit. | Middle priority for eviction |
+| **BestEffort** | No containers have a <br> memory/CPU limit or request.           | Most likely to be evicted    |
 
 ---
 
@@ -571,46 +593,56 @@ Properly configuring requests and limits is vital:
 **PriorityClass** is a non-namespaced object that defines the relative priority of Pods to control scheduling and eviction policies under resource contention.
 
 **Features**:
+
 - **Resource Assurance**: Assigns priorities to ensure critical workloads are scheduled first and receive the necessary resources.
 - **Controlled Eviction**: Manages pod eviction in a structured manner to maintain stability during high demand or limited resources.
 
 ---
 
-# Probes
+<!-- _class: title-heading -->
 
+## Probes
 
 ---
 
+<!-- _class: probe-headings -->
+
 <div class="columns3">
-  <div>
+<div>
 
-  #### Liveness Probes
-  - Checks container run status.
-  - Restarts on failure.
-  - Auto-recovers failed containers.
+### Liveness Probes
 
-  </div>
-  <div>
-  
-  #### Readiness Probes
-  - Verifies readiness to handle traffic.
-  - Blocks traffic on failure.
-  - Ensures traffic to healthy containers only.
+- Checks container run status.
+- Restarts on failure.
+- Auto-recovers failed containers.
 
-  </div>
-  <div>
-  
-  #### Startup Probes
-  - Allows time for slow-starting containers to boot.
-  - Postpones Liveness and Readiness Probes until successful start.
-  - Vital for apps with complex initializations or large data loads.
+</div>
+<div>
 
-  </div>
+### Readiness Probes
+
+- Verifies readiness to handle traffic.
+- Blocks traffic on failure.
+- Ensures traffic to healthy containers only.
+
+</div>
+<div>
+
+### Startup Probes
+
+- Allows time for slow-starting containers to boot.
+- Postpones Liveness and Readiness Probes until successful start.
+- Vital for apps with complex initializations or large data loads.
+
+</div>
 </div>
 
 ---
 
-# Testing
+<!-- _class: title-heading -->
+
+## Testing
+
 ![bg right:70% fit](./img/i-dont-always-test-but-when-i-do-i-test-in-production.jpg)
 
 ---
@@ -640,7 +672,9 @@ Chaos Testing, or Chaos Engineering, is the discipline of experimenting on a sys
 
 ---
 
-# Conclusion
+<!-- _class: title-heading -->
+
+## Conclusion
 
 - <i class="fa fa-check-circle"></i> **Resilience**: Kubernetes offers robust infrastructure for dependable system management.
 - <i class="fa fa-cogs"></i> **Optimization**: Key to performance are continual monitoring and timely adaptations.
@@ -649,13 +683,17 @@ Chaos Testing, or Chaos Engineering, is the discipline of experimenting on a sys
 
 ---
 
-# Questions
+<!-- _class: title-heading -->
+
+## Questions
 
 ![bg right](./img/owl.png)
 
 ---
 
-# Resources 
+<!-- _class: title-heading -->
+
+## Resources
 
 <div class="columns">
 <div>
@@ -669,7 +707,7 @@ Chaos Testing, or Chaos Engineering, is the discipline of experimenting on a sys
 </div>
 <div>
 
-## Chris Ayers 
+## Contact Chris Ayers
 
 <i class="fa-brands fa-bluesky"></i> BlueSky: [@chris-ayers.com](https://bsky.app/profile/chris-ayers.com)
 <i class="fa-brands fa-linkedin"></i> LinkedIn: - [chris\-l\-ayers](https://linkedin.com/in/chris-l-ayers/)

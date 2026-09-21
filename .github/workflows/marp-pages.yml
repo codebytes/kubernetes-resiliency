@@ -25,29 +25,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
       - name: Copy images
         run: mkdir build && cp -R slides/img build/img && cp -R slides/themes build/themes
 
       - name: Marp Build (HTML)
-        uses: docker://marpteam/marp-cli:v4.5.0
+        uses: docker://marpteam/marp-cli@sha256:4982f2f4e9b9ba6dc97f5cbb0eb0e286ae7654642ccf0778169d57c1c552a65a # v4.5.0
         with:
           args: --theme-set slides/themes -o build/index.html --html -- slides/Slides.md
         env:
           MARP_USER: root:root
       - name: Marp Build (PDF)
-        uses: docker://marpteam/marp-cli:v4.5.0
+        uses: docker://marpteam/marp-cli@sha256:4982f2f4e9b9ba6dc97f5cbb0eb0e286ae7654642ccf0778169d57c1c552a65a # v4.5.0
         with:
           args: --theme-set slides/themes -o build/Slides.pdf --html --pdf --allow-local-files -- slides/Slides.md
         env:
           MARP_USER: root:root
       - name: Setup Pages
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           # Upload entire repository
-          path: 'build'
+          path: "build"
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
