@@ -1,7 +1,8 @@
 /* custom-uncover.css */
+
 /* @theme custom-uncover */
 
-@import 'uncover';
+@import "uncover";
 
 section {
   /* Override default background */

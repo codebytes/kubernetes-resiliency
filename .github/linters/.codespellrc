@@ -1,0 +1,5 @@
+[codespell]
+check-hidden =
+skip = */package-lock.json,*/go.mod,*/go.sum,*.log,.git
+# Paket is the .NET dependency manager referenced by the ignore patterns.
+ignore-words-list = paket
