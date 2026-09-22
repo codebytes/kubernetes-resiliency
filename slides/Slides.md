@@ -19,7 +19,7 @@ footer: "https://chris-ayers.com"
 
 ## Chris Ayers
 
-### Principal Software Engineer<br>Azure CXP AzRel<br>Microsoft
+### Principal Software Engineer<br>Azure EngOps AzRel<br>Microsoft
 
 <i class="fa-brands fa-bluesky"></i> BlueSky: [@chris-ayers.com](https://bsky.app/profile/chris-ayers.com)
 <i class="fa-brands fa-linkedin"></i> LinkedIn: - [chris\-l\-ayers](https://linkedin.com/in/chris-l-ayers/)
@@ -298,6 +298,8 @@ Circuit breaking is a technique used to prevent an application from trying to pe
 
 ---
 
+<!-- _class: compact-vertical -->
+
 ### Service Meshes
 
 A **service mesh** is a dedicated infrastructure layer designed to facilitate service-to-service communications between microservices, typically using a sidecar proxy.
@@ -310,6 +312,8 @@ A **service mesh** is a dedicated infrastructure layer designed to facilitate se
 ![w:700px center](./img/service-mesh.png)
 
 ---
+
+<!-- _class: compact-vertical -->
 
 ### The Evolution of Service Mesh Architecture
 
@@ -440,6 +444,8 @@ Ensure system reliability, performance, and security.
 ![bg right](./img/metrics.png)
 
 ---
+
+<!-- _class: compact-vertical -->
 
 <div class="columns">
 <div>
@@ -722,5 +728,9 @@ Chaos Testing, or Chaos Engineering, is the discipline of experimenting on a sys
 <!-- Needed for mermaid, can be anywhere in file except frontmatter -->
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true });
+  mermaid.initialize({
+    startOnLoad: true,
+    // SVG labels avoid scaled foreignObject text clipping in Marp's print renderer.
+    flowchart: { htmlLabels: false },
+  });
 </script>
