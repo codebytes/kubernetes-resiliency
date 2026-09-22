@@ -58,3 +58,8 @@ section.agenda-heading h2 {
 section.probe-headings h3 {
   font-size: 1.05em;
 }
+
+section.compact-vertical {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
