@@ -6,6 +6,11 @@ Explore Kubernetes resiliency across infrastructure, Kubernetes components, netw
 
 [View HTML slides](https://chris-ayers.com/kubernetes-resiliency/) | [Download PDF](https://chris-ayers.com/kubernetes-resiliency/Slides.pdf)
 
+## Recordings
+
+- [Devoxx Greece 2024](https://www.youtube.com/watch?v=R4u5bvWceBQ)
+- [NDC Oslo 2023](https://www.youtube.com/watch?v=2UHYr1tuBFs)
+
 ## Resources
 
 - [Slide source](slides/Slides.md)
