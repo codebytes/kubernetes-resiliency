@@ -1,0 +1,6 @@
+{
+  "threshold": 0,
+  "reporters": ["consoleFull"],
+  "ignore": ["**/AGENTS.md", "**/.github/copilot-instructions.md"],
+  "absolute": true
+}
